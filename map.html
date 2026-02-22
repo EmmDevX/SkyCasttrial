@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+        }
+
+        #map {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 0;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 80px;
+            height: calc(100vh - 120px);
+            width: 90%;
+            max-width: 1200px;
+            transition: 0.3s;
+        }
+
+        #map:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .leaflet-control-zoom {
+            background-color: white !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .leaflet-control-zoom a {
+            background-color: white !important;
+            color: #333 !important;
+            font-weight: bold;
+            font-size: 18px !important;
+            width: 40px !important;
+            height: 40px !important;
+            line-height: 40px !important;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .leaflet-control-zoom a:hover {
+            background-color: #f0f0f0 !important;
+        }
+
+        .leaflet-popup-content-wrapper {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 9px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+        }
+
+        .leaflet-popup-content {
+            margin: 13px 19px;
+            line-height: 1.4;
+        }
+
+        body > h1 {
+            position: absolute;
+            z-index: 1000;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgb(71, 71, 71);
+            text-shadow: 1px 1px #aeaeae;
+        }
+
+        .search-bar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1005;
+            display: flex;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            background: white;
+            border-radius: 8px;
+            padding: 8px;
+            max-width: 90%;
+            width: 450px;
+        }
+
+        .search-input {
+            padding: 12px 16px;
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            font-size: 16px;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .search-input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: #999;
+        }
+
+        .search-button {
+            padding: 12px 24px;
+            border: none;
+            background: #007BFF;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            outline: none;
+            transition: 0.2s;
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .search-button:hover {
+            background: #0056b3;
+        }
+
+        .search-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Tablet (768px and below) */
+        @media (max-width: 768px) {
+            #map {
+                width: 95%;
+                height: calc(100vh - 100px);
+                margin-top: 70px;
+            }
+
+            .search-bar {
+                top: 15px;
+                width: calc(100% - 30px);
+                max-width: 500px;
+                gap: 6px;
+                padding: 6px;
+            }
+
+            .search-input {
+                padding: 10px 12px;
+                font-size: 15px;
+            }
+
+            .search-button {
+                padding: 10px 18px;
+                font-size: 13px;
+            }
+
+            body > h1 {
+                font-size: 18px;
+                top: 8px;
+            }
+        }
+
+        /* Mobile (480px and below) */
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+
+            #map {
+                width: 100%;
+                height: calc(100vh - 90px);
+                margin: 0;
+                margin-top: 90px;
+                border-radius: 4px;
+            }
+
+            .search-bar {
+                top: 12px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 20px);
+                max-width: 100%;
+                gap: 4px;
+                padding: 5px;
+                flex-wrap: wrap;
+            }
+
+            .search-input {
+                padding: 10px;
+                font-size: 14px;
+                flex: 1;
+                min-width: 100px;
+                border-radius: 4px;
+            }
+
+            .search-button {
+                padding: 10px 14px;
+                font-size: 12px;
+                min-width: 50px;
+            }
+
+            .leaflet-control-zoom a {
+                width: 36px !important;
+                height: 36px !important;
+                line-height: 36px !important;
+                font-size: 16px !important;
+            }
+
+            .leaflet-popup-content {
+                margin: 10px 15px;
+                font-size: 13px;
+            }
+
+            body > h1 {
+                font-size: 16px;
+                top: 6px;
+            }
+        }
+
+        /* Extra small devices (under 360px) */
+        @media (max-width: 360px) {
+            #map {
+                width: 100%;
+                height: calc(100vh - 85px);
+                margin-top: 85px;
+            }
+
+            .search-bar {
+                top: 10px;
+                width: calc(100% - 16px);
+                gap: 2px;
+                padding: 4px;
+            }
+
+            .search-input {
+                padding: 8px;
+                font-size: 13px;
+                min-width: 80px;
+            }
+
+            .search-button {
+                padding: 8px 10px;
+                font-size: 11px;
+                min-width: 45px;
+            }
+
+            .leaflet-control-zoom a {
+                width: 34px !important;
+                height: 34px !important;
+                line-height: 34px !important;
+                font-size: 14px !important;
+            }
+
+            body > h1 {
+                font-size: 14px;
+            }
+        }
+    </style>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body style="background: transparent;">
+  
+    <div class="search-bar">
+        <input type="text" id="search" class="search-input" placeholder="Search for a location...">
+        <button id="searchButton" class="search-button">Search</button>
+    </div>
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+    <!-- Script JS -->
+    <script src="./script.js"></script>
+    <script>
+        // Initialize the map with better defaults
+        const map = L.map('map', {
+            zoomControl: true,
+            attributionControl: true,
+            dragging: true,
+            tap: true,
+            touchZoom: true
+        }).setView([51.505, -0.09], 13);
+
+        // Add OpenStreetMap tiles with better clarity
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            minZoom: 2,
+            attribution: '© OpenStreetMap contributors',
+            crossOrigin: true
+        }).addTo(map);
+
+        // Add a marker for initial location
+        const marker = L.marker([51.505, -0.09], {
+            draggable: true
+        }).addTo(map).bindPopup('<b>Welcome to SkyCast Map!</b><br>Search for a location to get started.');
+
+        // Handle window resize to fix map rendering
+        window.addEventListener('resize', function() {
+            setTimeout(() => map.invalidateSize(), 250);
+        });
+
+        // Handle search functionality with better error handling
+        document.getElementById('searchButton').addEventListener('click', searchLocation);
+        document.getElementById('search').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchLocation();
+            }
+        });
+
+        function searchLocation() {
+            const location = document.getElementById('search').value.trim();
+            if (!location) {
+                alert('Please enter a location to search.');
+                return;
+            }
+
+            const searchButton = document.getElementById('searchButton');
+            searchButton.textContent = 'Searching...';
+            searchButton.disabled = true;
+
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const lat = parseFloat(data[0].lat);
+                        const lon = parseFloat(data[0].lon);
+
+                        map.setView([lat, lon], 13);
+                        marker.setLatLng([lat, lon]).setPopupContent(
+                            `<b>${data[0].display_name.split(',')[0]}</b><br><small>${data[0].display_name}</small>`
+                        ).openPopup();
+                    } else {
+                        alert('Location not found! Please try another search.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching location:', error);
+                    alert('Error searching location. Please try again.');
+                })
+                .finally(() => {
+                    searchButton.textContent = 'Search';
+                    searchButton.disabled = false;
+                });
+        }
+    </script>
+</body>
+</html>

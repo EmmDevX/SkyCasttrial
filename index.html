@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style-new.css">
+    <link rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <link rel="icon" href="./images/skycast-favicon.png" type="image/x-icon">
+    <title>SkyCast</title>
+  </head>
+  <body>
+     <div class="dashboard-container">
+      <header class="main-header">
+        <!--Heading Section-->
+        <div class="skyheader">
+       <div class="logo">
+          <img src="./images/skycastlogo-modified.png" alt="SkyCast Logo" style="height: auto; max-height: 100px; max-width: 100%; width: auto;" data-outa-display="fade-in">
+       </div>
+       <!--Theme Changer-->
+       <div class="toggle" id="toggle">
+        <div class="circle">
+           🌙
+        </div>
+       </div>
+        </div>
+      </header>
+      
+     
+      <!--Information-->
+      <h2 class="hero-text">How's the sky looking today?</h2>
+      <div class="search-bar">
+        <input type="text" id="cityInput" placeholder="Search for a place..." />
+        <button id="searchBtn" class="btn" onclick="searchLocation()">Search</button>
+      </div>
+
+      <main class="grid-layout">
+        <section class="left-col">
+          <!--Weather Gallery-->
+          <div class="main-weather-card">
+            <div class="location-info">
+              <h3 id="cityName">Berlin, Germany</h3>
+              <p id="date">Tuesday, Aug 3, 2021</p>
+            </div>
+            <div class="temp-display">
+              <span class="icon">☀️</span>
+              <span class="temp">20°</span>
+            </div>
+          </div>
+        <!-- Forecast Information-->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <p>FEELS LIKE</p>
+              <strong>18°</strong>
+            </div>
+            <div class="stat-card">
+              <p>HUMIDITY</p>
+              <strong>46%</strong>
+            </div>
+            <div class="stat-card">
+              <p>WIND</p>
+              <strong>14 km/h</strong>
+            </div>
+            <div class="stat-card">
+              <p>PRECIPITATION</p>
+              <strong>0 mm</strong>
+            </div>
+          </div>
+        <!--Daily Forecast-->
+          <div class="daily-forecast">
+            <p class="label">Daily Forecast</p>
+            <div class="days-row" id="dailyRow"></div>
+          </div>
+        </section>
+        <!--Hourly Forecast-->
+        <aside class="right-col">
+          <div class="panel-header">
+            <span>Hourly Forecast</span>
+            <select id="daySelect" class="black">
+              <option>Monday</option>
+              <option>Tuesday</option>
+              <option>Wednesday</option>
+              <option>Thursday</option>
+              <option>Friday</option>
+              <option>Saturday</option>
+              <option>Sunday</option>
+            </select>
+          </div>
+          <div class="hourly-list" id="hourlyList"></div>
+        </aside>
+      </main>
+      <!--Footer-->
+      <footer class="footer">
+         <iframe src="map.html"></iframe>
+         <p class="copyright">&copy; 2026 SkyCast | All Rights Reserved</p> 
+        <!--Social Media Icons-->
+        <iframe class="social-icon" src="social icon.html"></iframe>
+        </footer>
+    </div>
+  </body>
+  <script src="Javascript/script.js"></script>
+  
+</html>

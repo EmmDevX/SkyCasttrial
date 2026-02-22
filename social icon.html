@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: transparent;
+        }
+        
+        .feature {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            border-radius: 5px;
+            color: red;
+            z-index: 100;
+        }
+
+        .social-media {
+            background-color: rgba(30, 41, 59, 0.7);
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: 0.4s;
+        }
+
+        .social-media:hover {
+            transition: 0.4s;
+            transform: translateY(5px);
+        }
+
+        .media {
+            margin-right: 10px;
+            border-bottom: 2px solid #fff transparent;
+            padding: 0px 0px;
+            width: 20px;
+        }
+
+        .media img {
+            filter: invert(1);
+            transition: 0.4s;
+        }
+
+        .media img:hover {
+            color: red;
+            transition: 0.4s;
+            transform: translateY(3px);
+        }
+
+        /* Tablet (768px and below) */
+        @media (max-width: 768px) {
+            .feature {
+                top: 15px;
+                right: 15px;
+            }
+
+            .social-media {
+                padding: 8px 15px;
+                gap: 8px;
+            }
+
+            .media {
+                width: 18px;
+            }
+        }
+
+        /* Mobile (480px and below) */
+        @media (max-width: 480px) {
+            .feature {
+                top: 10px;
+                right: 10px;
+            }
+
+            .social-media {
+                padding: 6px 10px;
+                gap: 6px;
+            }
+
+            .media {
+                width: 16px;
+            }
+
+            .media img {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        /* Extra small devices (under 360px) */
+        @media (max-width: 360px) {
+            .feature {
+                top: 8px;
+                right: 8px;
+            }
+
+            .social-media {
+                padding: 5px 8px;
+                gap: 5px;
+            }
+
+            .media {
+                width: 14px;
+                margin-right: 5px;
+            }
+
+            .media img {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    </style>
+    <title>SkyCast Social</title>
+</head>
+<body>
+    <div class="feature">
+     <div class="social-media">
+            <div class="media">
+            <a href="https://x.com/skycast2026" target="_blank" class="twitter">
+           <img src="images/twitter.svg" alt="">
+            </a>
+           </div>
+            <div class="media">
+              <a href="mailto:skycast916@gmail.com?subject=Website Inquiry&body=Hello SkyCast, I saw your website." target="_blank" class="mail">
+                <img src="images/mail.svg" alt="">
+              </a>
+            </div>
+         </div>
+</div>
+</body>
+</html>
