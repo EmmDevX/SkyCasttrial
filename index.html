@@ -1,103 +1,131 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style-new.css">
-    <link rel="stylesheet"
-href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-    <link rel="icon" href="./images/skycast-favicon.png" type="image/x-icon">
-    <title>SkyCast</title>
-  </head>
-  <body>
-     <div class="dashboard-container">
-      <header class="main-header">
-        <!--Heading Section-->
-        <div class="skyheader">
-       <div class="logo">
-          <img src="./images/skycastlogo-modified.png" alt="SkyCast Logo" style="height: auto; max-height: 100px; max-width: 100%; width: auto;" data-outa-display="fade-in">
-       </div>
-       <!--Theme Changer-->
-       <div class="toggle" id="toggle">
-        <div class="circle">
-           🌙
-        </div>
-       </div>
-        </div>
-      </header>
-      
-     
-      <!--Information-->
-      <h2 class="hero-text">How's the sky looking today?</h2>
-      <div class="search-bar">
-        <input type="text" id="cityInput" placeholder="Search for a place..." />
-        <button id="searchBtn" class="btn" onclick="searchLocation()">Search</button>
-      </div>
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet"href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+      <link rel="icon" href="./images/skycast-favicon.png" type="image/x-icon">
+        <script src="https://cdn.tailwindcss.com"></script>
+      <title>SkyCast</title>
+    </head>
+   <body class="bg-slate-900 text-white min-h-screen">
 
-      <main class="grid-layout">
-        <section class="left-col">
-          <!--Weather Gallery-->
-          <div class="main-weather-card">
-            <div class="location-info">
-              <h3 id="cityName">Berlin, Germany</h3>
-              <p id="date">Tuesday, Aug 3, 2021</p>
-            </div>
-            <div class="temp-display">
-              <span class="icon">☀️</span>
-              <span class="temp">20°</span>
-            </div>
-          </div>
-        <!-- Forecast Information-->
-          <div class="stats-grid">
-            <div class="stat-card">
-              <p>FEELS LIKE</p>
-              <strong>18°</strong>
-            </div>
-            <div class="stat-card">
-              <p>HUMIDITY</p>
-              <strong>46%</strong>
-            </div>
-            <div class="stat-card">
-              <p>WIND</p>
-              <strong>14 km/h</strong>
-            </div>
-            <div class="stat-card">
-              <p>PRECIPITATION</p>
-              <strong>0 mm</strong>
-            </div>
-          </div>
-        <!--Daily Forecast-->
-          <div class="daily-forecast">
-            <p class="label">Daily Forecast</p>
-            <div class="days-row" id="dailyRow"></div>
-          </div>
-        </section>
-        <!--Hourly Forecast-->
-        <aside class="right-col">
-          <div class="panel-header">
-            <span>Hourly Forecast</span>
-            <select id="daySelect" class="black">
-              <option>Monday</option>
-              <option>Tuesday</option>
-              <option>Wednesday</option>
-              <option>Thursday</option>
-              <option>Friday</option>
-              <option>Saturday</option>
-              <option>Sunday</option>
-            </select>
-          </div>
-          <div class="hourly-list" id="hourlyList"></div>
-        </aside>
-      </main>
-      <!--Footer-->
-      <footer class="footer">
-         <iframe src="map.html"></iframe>
-         <p class="copyright">&copy; 2026 SkyCast | All Rights Reserved</p> 
-        <!--Social Media Icons-->
-        <iframe class="social-icon" src="social icon.html"></iframe>
-        </footer>
+<div class="dashboard-container max-w-7xl mx-auto px-4 py-6">
+
+<header class="main-header mb-8">
+  <div class="skyheader flex justify-between items-center">
+
+    <div class="logo">
+      <img src="./images/skycastlogo-modified.png"
+           alt="SkyCast Logo"
+           class="max-h-20 w-auto hover:scale-105 transition duration-300"
+           data-outa-display="fade-in">
     </div>
-  </body>
-  <script src="Javascript/script.js"></script>
-  
-</html>
+
+    <!-- Theme Toggle (ID untouched) -->
+ 
+
+</header>
+
+<h2 class="hero-text text-3xl font-bold text-center mb-6">
+  How's the sky looking today?
+</h2>
+
+<!-- SEARCH BAR -->
+<div class="search-bar flex justify-center gap-2 mb-10">
+  <input type="text"
+         id="cityInput"
+         placeholder="Search for a place..."
+         class="px-4 py-2 rounded-lg text-black w-72 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+
+  <button id="searchBtn"
+          class="btn bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg transition duration-300 hover:scale-105">
+    Search
+  </button>
+</div>
+
+<!-- MAIN GRID -->
+<main class="grid-layout grid md:grid-cols-3 gap-6">
+
+<section class="left-col md:col-span-2 space-y-6">
+
+<!-- MAIN WEATHER CARD -->
+<div class="main-weather-card bg-slate-800 rounded-2xl p-6 shadow-lg">
+  <div class="location-info flex justify-between items-center">
+    <div>
+      <h3 id="cityName" class="text-xl font-semibold">Berlin, Germany</h3>
+      <p id="date" class="text-gray-400">Tuesday, Aug 3, 2021</p>
+    </div>
+    <div class="temp-display text-4xl flex items-center gap-2">
+      <span class="icon">☀️</span>
+      <span class="temp">20°</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS GRID -->
+<div class="stats-grid grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="stat-card bg-slate-800 p-4 rounded-xl text-center">
+    <p class="text-gray-400 text-sm">FEELS LIKE</p>
+    <strong>18°</strong>
+  </div>
+  <div class="stat-card bg-slate-800 p-4 rounded-xl text-center">
+    <p class="text-gray-400 text-sm">HUMIDITY</p>
+    <strong>46%</strong>
+  </div>
+  <div class="stat-card bg-slate-800 p-4 rounded-xl text-center">
+    <p class="text-gray-400 text-sm">WIND</p>
+    <strong>14 km/h</strong>
+  </div>
+  <div class="stat-card bg-slate-800 p-4 rounded-xl text-center">
+    <p class="text-gray-400 text-sm">PRECIPITATION</p>
+    <strong>0 mm</strong>
+  </div>
+</div>
+
+<!-- DAILY FORECAST -->
+<div class="daily-forecast bg-slate-800 rounded-2xl p-6 shadow-lg">
+  <p class="label font-semibold mb-4">Daily Forecast</p>
+  <div class="days-row flex gap-4 overflow-x-auto" id="dailyRow"></div>
+</div>
+
+</section>
+
+<!-- RIGHT COLUMN -->
+<aside class="right-col bg-slate-800 rounded-2xl p-6 shadow-lg">
+
+<div class="panel-header flex justify-between items-center mb-4">
+  <span class="font-semibold text-lg">Hourly Forecast</span>
+  <select id="daySelect"
+          class="black bg-slate-700 px-2 py-1 rounded-md">
+    <option>Monday</option>
+    <option>Tuesday</option>
+    <option>Wednesday</option>
+    <option>Thursday</option>
+    <option>Friday</option>
+    <option>Saturday</option>
+    <option>Sunday</option>
+  </select>
+</div>
+
+<div class="hourly-list space-y-3" id="hourlyList"></div>
+
+</aside>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer mt-12 text-center text-gray-400 text-sm space-y-4">
+  <iframe src="map.html" class="w-full h-64 rounded-xl"></iframe>
+  <p class="copyright">&copy; 2026 SkyCast | All Rights Reserved</p>
+  <iframe class="social-icon w-full h-16" src="social icon.html"></iframe>
+</footer>
+
+</div>
+
+<script src="Javascript/script.js" defer></script>
+
+</body>
+    <script src="Javascript/script.js"></script>
+    
+  </html>
